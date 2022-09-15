@@ -17,13 +17,10 @@ const createCollege = async function (req, res) {
         if (!validator.isVaildName(name)) return res.status(400).send({ status: false, msg: "please enter valid college name" })
 
         if (!validator.isValid(fullName)) return res.status(400).send({ status: false, msg: "Full Name of the college is Mandatory" })
-        if (!validator.isValidFname(fullName)) return res.status(400).send({ status: false, msg: "Enter valid fullName" })
 
 
         if (!validator.isValid(logoLink)) return res.status(400).send({ status: false, msg: "LogoLink  is mandatory" })
         if (!validator.isValidUrl(logoLink)) return res.status(400).send({ status: false, msg: "enter a valid logoLink url" })
-
-
 
         const duplicateName = await collegeModel.findOne({ name, isDeleted: false });
         if (duplicateName) return res.status(400).send({ status: false, msg: `College ${name} is already in use` })

@@ -15,7 +15,7 @@ const isValidEmail = function (value) {
 // valid Number
 
 const isValidNumber = function(value){
-    if(/^\(?([6-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value)) {
+    if(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value)) {
         return true
     }else{
         return false
@@ -54,17 +54,5 @@ const isVaildInternName = function(value){
     }
 }
 
-//for valid full name of the college
 
-const isValidFname= function(value){
-    if(/^[a-zA-Z ]+$/.test(value)){
-        return true
-    }else{
-        return false
-    }
-}
-
-
-
-
-module.exports = { isValid, isValidEmail, isValidNumber,isValidUrl,isVaildName,isValidFname,isVaildInternName }
+module.exports = { isValid, isValidEmail, isValidNumber,isValidUrl,isVaildName,isVaildInternName }
