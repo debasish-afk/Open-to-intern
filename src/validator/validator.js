@@ -46,13 +46,11 @@ const isVaildName = function(value){
 //for valid interns name
 
 const isVaildInternName = function(value){
-    if(/^[a-zA-z]+([\s][a-zA-Z]+)*$/
-    .test(value)){
+    if(/^[a-zA-z]+([\s][a-zA-Z]+)*$/.test(value)){
         return true
     }else{
         return false
     }
 }
-
 
 module.exports = { isValid, isValidEmail, isValidNumber,isValidUrl,isVaildName,isVaildInternName }
