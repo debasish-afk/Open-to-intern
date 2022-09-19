@@ -12,14 +12,14 @@ const internSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        lowecase: true,
+        lowercase: true,
         trim: true
     },
     mobile: {
         type: String,
         required: true,
         unique: true,
-        trime: true
+        trim: true
     },
     collegeId: {
         type: ObjectId,
@@ -30,6 +30,6 @@ const internSchema = new mongoose.Schema({
         default: false
     }
 
-},)
+},{timestamps: true})
 
 module.exports = mongoose.model("Intern", internSchema) //interns

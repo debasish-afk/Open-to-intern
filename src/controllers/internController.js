@@ -3,6 +3,7 @@ const internModel = require("../models/internModel")
 const validator = require("../validator/validator")
 
 const createIntern = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
     try {
         let data = req.body
         let { name, mobile, email, collegeName } = data //object destructuring

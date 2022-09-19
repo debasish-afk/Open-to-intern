@@ -6,24 +6,24 @@ const collegeSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique:true,
+        unique:true
     },
     fullName: {
         type: String,
         required: true,
-        trim:true,
+        trim:true
         
     },
     logoLink: {
         type: String,
         required: true,
-        trim: true,
+        trim: true
     },
     isDeleted:{
         type:Boolean,
         default:false
     }
-    },)
+    },{timestamps: true})
 
 
 module.exports = mongoose.model('College', collegeSchema) //college

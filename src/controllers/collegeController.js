@@ -3,26 +3,23 @@ const validator = require("../validator/validator.js")
 const internModel = require("../models/internModel")
 
 const createCollege = async function (req, res) {
-
+    
     try {
         let data = req.body;
         let { name, fullName, logoLink } = data;
 
-        if (Object.keys(data).length == 0) { return res.status(400).send({ status: false, msg: "please provide mandatory college details" }) }
-
+        if (Object.keys(data).length == 0)  return res.status(400).send({ status: false, msg: "please provide mandatory college details" }) 
 
         if (!validator.isValid(name)) return res.status(400).send({ status: false, msg: "name of the college is mandatory" })
         if (!validator.isVaildName(name)) return res.status(400).send({ status: false, msg: "please enter valid college name" })
 
         if (!validator.isValid(fullName)) return res.status(400).send({ status: false, msg: "Full Name of the college is Mandatory" })
 
-
         if (!validator.isValid(logoLink)) return res.status(400).send({ status: false, msg: "LogoLink  is mandatory" })
         if (!validator.isValidUrl(logoLink)) return res.status(400).send({ status: false, msg: "enter a valid logoLink url" })
 
         const duplicateName = await collegeModel.findOne({ name, isDeleted: false });
         if (duplicateName) return res.status(400).send({ status: false, msg: `College ${name} is already in use` })
-
 
         const collegeData = await collegeModel.create(data);
         return res.status(201).send({ status: true, data: collegeData })
@@ -33,6 +30,7 @@ const createCollege = async function (req, res) {
 }
 
 const getCollegeInterns = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
     try {
         let data = req.query;
         if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "Please give query to fetch intern details" })
@@ -49,7 +47,7 @@ const getCollegeInterns = async function (req, res) {
         let fullName = collegeDetails.fullName;
         let logoLink = collegeDetails.logoLink;
 
-        let interns = await internModel.find({ collegeId: id }).select({ _id: 1, name: 1, email: 1, mobile: 1 })
+        let interns = await internModel.find({ collegeId: id, isDeleted: false}).select({ _id: 1, name: 1, email: 1, mobile: 1 })
         if (interns.length == 0) return res.status(400).send({ status: false, msg: "No inerns applied for this college " })
 
         let internsDetails = {
